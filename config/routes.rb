@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root "top#index"
+
   get "top/index"
   get "top/terms"
   get "top/privacy"
