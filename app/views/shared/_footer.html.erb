@@ -1,0 +1,21 @@
+<footer class="footer">
+  <div class="footer__links">
+    <%= link_to "お問合せ", "#", class: "footer__link" %>
+    <%= link_to "利用規約", "#", class: "footer__link" %>
+    <%= link_to "プライバシーポリシー", "#", class: "footer__link" %>
+  </div>
+  <div class="footer__icons">
+    <%= link_to "#", class: "footer__icon" do %>
+      <i class="fab fa-instagram"></i>
+    <% end %>
+    <%= link_to "#", class: "footer__icon" do %>
+      <i class="fa-brands fa-x-twitter"></i>
+    <% end %>
+    <%= link_to "#", class: "footer__icon" do %>
+      <i class="fab fa-facebook-f"></i>
+    <% end %>
+  </div>
+  <div class="footer__copyright">
+    &copy; <%= Time.current.year %> ALPI. All rights reserved.
+  </div>
+</footer>

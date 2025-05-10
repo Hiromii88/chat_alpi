@@ -1,0 +1,86 @@
+// app/assets/stylesheets/application.scss
+@import "top";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #a78bfa; /* お好みの紫系 */
+  padding: 10px 20px;
+  color: white;
+}
+
+.menu-button {
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.menu-bar {
+  position: fixed;
+  top: 0;
+  left: -250px; /* 初期は非表示（左に隠す） */
+  width: 250px;
+  height: 100vh;
+  background-color: #9b80eb;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+.menu-bar.open {
+  left: 0; /* 表示状態 */
+}
+
+
+.header__link {
+  margin-left: 16px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main { 
+  flex: 1;
+}
+
+/* フッター全体 */
+.footer {
+  background-color: #f8f8f8;
+  padding: 16px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  border-top: 1px solid #ccc;
+  margin-top: auto;
+}
+
+/* SNSアイコン */
+.footer__sns {
+  margin-bottom: 8px;
+}
+
+.footer__sns a {
+  margin: 0 8px;
+  color: #666;
+  font-size: 20px;
+}
+
+.footer__sns a:hover {
+  color: #000;
+}
+

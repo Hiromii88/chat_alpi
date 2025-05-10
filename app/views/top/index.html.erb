@@ -1,2 +1,31 @@
-<h1>Top#index</h1>
-<p>Find me in app/views/top/index.html.erb</p>
+<div class="top-page">
+  <h2 class="top-page__subtitle">どの山に行く？</h2>
+
+  <div id="logo">
+    <%= image_tag("top_bg.png", alt: "ALPI Logo") %>
+  </div>
+
+  <div class="top-page__characters">
+    <%= image_tag("cat_icon.png", alt: "ねこアルピ", class: "character-icon") %>
+    <%= image_tag("oldman_icon.png", alt: "おじいちゃんアルピ", class: "character-icon") %>
+    <%= image_tag("alien_icon.png", alt: "宇宙人アルピ", class: "character-icon") %>
+  </div>
+
+  <%= link_to "誰に聞く？", "#", class: "ask-button" %>
+
+  <div class="top-page__description">
+    <p>どこの山に登るか迷っているあなたに</p>
+    <p>提案をしてくれるアルピ達。</p>
+    <p>好きなアルピを選んでね。</p>
+  </div>
+
+  <div class="top-page__search">
+    <p>自力で探す！</p>
+    <div class="search-form">
+      <%= form_with url: "#", method: :get, local: true do |form| %>
+        <%= form.text_field :keyword, placeholder: "キーワード検索", class: "search-input" %>
+        <%= form.submit "検索", class: "search-button" %>
+      <% end %>
+    </div>
+  </div>
+</div>
