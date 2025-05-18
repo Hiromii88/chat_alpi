@@ -5,13 +5,22 @@
     <%= image_tag("top_bg.png", alt: "ALPI Logo") %>
   </div>
 
-  <div class="top-page__characters">
-    <%= image_tag("cat_icon.png", alt: "ねこアルピ", class: "character-icon") %>
-    <%= image_tag("oldman_icon.png", alt: "おじいちゃんアルピ", class: "character-icon") %>
-    <%= image_tag("alien_icon.png", alt: "宇宙人アルピ", class: "character-icon") %>
+  <div class="flex space-x-6 justify-center mt-6">
+    <%= image_tag("cat_icon.png", alt: "にゃん", class: "character-icon", data: { character: "cat" }) %>
+    <%= image_tag("oldman_icon.png", alt: "じぃ", class: "character-icon", data: { character: "oldman" }) %>
+    <%= image_tag("alien_icon.png", alt: "うちゅ", class: "character-icon", data: { character: "alien" }) %>
   </div>
 
-  <%= link_to "誰に聞く？", chatbots_show_path, class: "ask-button" %>
+  <!-- モーダル本体 -->
+  <div id="character-modal" class="modal hidden">
+    <div class="modal-content">
+      <p id="modal-message">このキャラと話す？</p>
+      <div class="modal-buttons">
+        <button id="cancel-button">キャンセル</button>
+        <a id="confirm-button" href="#">OK</a>
+      </div>
+    </div>
+  </div>
 
   <div class="top-page__description">
     <p>どこの山に登るか迷っているあなたに</p>

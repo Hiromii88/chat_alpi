@@ -34,7 +34,11 @@ document.addEventListener("turbo:load", () => {
 
     if (formText.value.trim() === "") return;
 
-    const url = `/chatbots/generate_text.json?user_input=${encodeURIComponent(formText.value)}`;
+    // URLパラメータからキャラクターの種類を取得
+    const characterType = new URLSearchParams(window.location.search).get("character_type");
+
+    // character_type を含めてリクエストを送信
+    const url = `/chatbots/generate_text.json?user_input=${encodeURIComponent(formText.value)}&character_type=${encodeURIComponent(characterType)}`;
     const postOptions = {
       headers: {
         'Accept': 'application/json',
@@ -54,22 +58,84 @@ document.addEventListener("turbo:load", () => {
             <div class="icon-container w-8 h-8 flex-shrink-0">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-full h-full"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
             </div>
-          </div>`;
+          </div>
+        `;
         list.insertAdjacentHTML("beforeend", inputHTML);
 
+        // URLパラメータからキャラクタータイプを取得
+        const character = new URLSearchParams(window.location.search).get("character_type");
+
+        // キャラクターに対応したアイコンのパスを定義
+        const characterImagePaths = {
+          cat: "/assets/cat_icon.png",
+          oldman: "/assets/oldman_icon.png",
+          alien: "/assets/alien_icon.png"
+        };
+
+        // 条件分岐で画像パスを決定
+        const characterIconUrl = characterImagePaths[character]
+
+        // 吹き出しのHTMLを組み立て（この部分は残す）
         const responseHTML = `
-          <div class="text-left flex items-start space-x-2">
-            <div class="icon-container w-8 h-8 flex-shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="w-full h-full"><path d="M320 0c17.7 0 32 14.3 32 32V96H472c39.8 0 72 32.2 72 72V440c0 39.8-32.2 72-72 72H168c-39.8 0-72-32.2-72-72V168c0-39.8 32.2-72 72-72H288V32c0-17.7 14.3-32 32-32zM208 384c-8.8 0-16 7.2-16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16H208zm96 0c-8.8 0-16 7.2-16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16H304zm96 0c-8.8 0-16 7.2-16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16H400zM264 256a40 40 0 1 0 -80 0 40 40 0 1 0 80 0zm152 40a40 40 0 1 0 0-80 40 40 0 1 0 0 80zM48 224H64V416H48c-26.5 0-48-21.5-48-48V272c0-26.5 21.5-48 48-48zm544 0c26.5 0 48 21.5 48 48v96c0 26.5-21.5 48-48 48H576V224h16z"/></svg>
-            </div>
-            <div class="chat-bubble inline-block bg-gray-100 px-4 py-2 rounded-lg max-w-3/4 break-words">
-              <span>${item.text}</span>
-            </div>
-          </div>`;
+        <div class="text-left flex items-start space-x-2">
+          <div class="icon-container w-8 h-8 flex-shrink-0">
+            <img src="${characterIconUrl}" alt="User Icon" class="w-full h-full rounded-full object-cover">
+          </div>
+          <div class="chat-bubble inline-block bg-gray-100 px-4 py-2 rounded-lg max-w-3/4 break-words">
+            <span>${item.text}</span>
+          </div>
+        </div>
+        `;
+
         list.insertAdjacentHTML("beforeend", responseHTML);
         formText.value = "";
         list.scrollTop = list.scrollHeight;
       })
       .catch(error => console.error('Error:', error));
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const icons = document.querySelectorAll(".character-icon");
+  const modal = document.getElementById("character-modal");
+  const confirmButton = document.getElementById("confirm-button");
+  const cancelButton = document.getElementById("cancel-button");
+  const modalMessage = document.getElementById("modal-message");
+
+  // キャラごとのメッセージと画像パスをまとめておく
+  const characterData = {
+    cat: {
+      message: "にゃんと話す？",
+      imagePath: "/assets/cat_icon.png"
+    },
+    oldman: {
+      message: "じぃと話す？",
+      imagePath: "/assets/oldman_icon.png"
+    },
+    alien: {
+      message: "うちゅと話す？",
+      imagePath: "/assets/alien_icon.png"
+    }
+  };
+
+  icons.forEach(icon => {
+    icon.addEventListener("click", () => {
+      const character = icon.dataset.character;
+
+      if (!characterData[character]) return; // もし不正なキャラなら無視
+
+      // モーダルのメッセージをセット
+      modalMessage.textContent = characterData[character].message;
+
+      // OKボタンのリンクにキャラクタータイプをセット
+      confirmButton.href = `/chatbots/show?character_type=${character}`;
+
+      // モーダル表示
+      modal.classList.remove("hidden");
+    });
+  });
+
+  cancelButton.addEventListener("click", () => {
+    modal.classList.add("hidden");
   });
 });
