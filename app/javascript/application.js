@@ -66,10 +66,11 @@ document.addEventListener("turbo:load", () => {
         const character = new URLSearchParams(window.location.search).get("character_type");
 
         // キャラクターに対応したアイコンのパスを定義
+        const iconData = document.getElementById("character-icon-paths");
         const characterImagePaths = {
-          cat: "/assets/cat_icon.png",
-          oldman: "/assets/oldman_icon.png",
-          alien: "/assets/alien_icon.png"
+          cat: iconData.dataset.cat,
+          oldman: iconData.dataset.oldman,
+          alien: iconData.dataset.alien
         };
 
         // 条件分岐で画像パスを決定
