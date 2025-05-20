@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "mountains/index"
+  get "mountains/show"
   root "top#index"
 
   get 'chatbots/show', to: 'chatbots#show', as: 'chatbots_show'
@@ -10,4 +12,6 @@ Rails.application.routes.draw do
   end
 
   post 'select_character', to: 'characters#select', as: 'select_character'
+
+  resources :mountains, only: [:index, :show]
 end

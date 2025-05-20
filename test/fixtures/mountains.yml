@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  height: 1
+  level: MyString
+  feature: MyText
+  mountain_hut: false
+  route_distance: 1
+
+two:
+  name: MyString
+  height: 1
+  level: MyString
+  feature: MyText
+  mountain_hut: false
+  route_distance: 1
