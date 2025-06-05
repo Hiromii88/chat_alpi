@@ -3,8 +3,12 @@
     <button class="menu-button">☰</button>
   </div>
   <div class="header__right">
-    <%= link_to "ログイン", "#", class: "header__link" %>
-    <%= link_to "新規登録", "#", class: "header__link" %>
+    <% if current_user %>
+      <%= link_to "ログアウト", logout_path, method: :delete %>
+    <% else %>
+      <%= link_to "ログイン", login_path, class: "header__link" %>
+      <%= link_to "新規登録", "#", class: "header__link" %>
+    <% end %>
   </div>
 
   <%= render "shared/menu_bar" %>
