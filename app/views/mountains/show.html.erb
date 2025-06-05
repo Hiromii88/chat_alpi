@@ -1,2 +1,53 @@
-<h1>Mountains#show</h1>
-<p>Find me in app/views/mountains/show.html.erb</p>
+<div class="max-w-4xl mx-auto py-6 px-4">
+  <h2 class="text-2xl font-bold mb-4"><%= @mountain.name %></h2>
+
+  <!-- 山の画像表示（あれば） -->
+  <% if @mountain.image.attached? %>
+    <div class="mb-4">
+      <%= image_tag @mountain.image, class: "w-full h-auto rounded shadow" %>
+    </div>
+  <% else %>
+    <div class="bg-gray-200 h-48 w-full mb-4 flex items-center justify-center text-gray-500">
+      画像はまだありません
+    </div>
+  <% end %>
+  <% if current_user&.admin? %>
+    <div class="mb-4">
+      <%= link_to "編集", edit_mountain_path(@mountain), class: "inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" %>
+    </div>
+  <% end %>
+
+  <p class="mb-6">
+    この山の標高は <strong><%= @mountain.height %> m</strong>
+  </p>
+
+  <p class="mb-4">
+    エリア：<strong><%= @mountain.prefecture %></strong>
+  </p>
+
+  <div class="mb-6">
+    <h2 class="text-lg font-semibold mb-2">この山の特徴</h2>
+    <p><%= simple_format(@mountain.feature) %></p>
+  </div>
+
+  <%= link_to "一覧へ戻る", mountains_path, class: "inline-block bg-purple-300 text-white px-4 py-2 rounded hover:bg-purple-400 mb-6" %>
+
+  <hr class="my-6">
+
+  <h3 class="text-xl font-semibold mb-4">関連するレポ</h3>
+
+  <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+    <!-- レポートのダミー -->
+    <% 3.times do %>
+      <div class="text-center">
+        <div class="h-24 bg-gray-200 mb-2"></div>
+        <p>〇月〇日レポ</p>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mt-4 flex justify-center">
+    <!-- ページネーション（レポート用） -->
+    <div class="bg-yellow-300 text-center px-4 py-2 rounded">次へ</div>
+  </div>
+</div>

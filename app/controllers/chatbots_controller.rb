@@ -20,17 +20,14 @@ class ChatbotsController < ApplicationController
 
     return unless @user_input.present?
 
-    # 都道府県名を抽出
     prefecture = extract_prefecture(@user_input)
 
-    # マッチしたら検索、それ以外はnil
     mountains = if prefecture
-                  Mountain.where("prefecture LIKE ?", "%#{prefecture}%")
+                  Mountain.where("area LIKE ?", "%#{prefecture}%")
                 else
                   []
                 end
 
-    # mountainデータをプロンプトに組み込む（任意）
     mountain_info = mountains.map { |m| "#{m.name}（#{m.prefecture}）: #{m.feature}" }.join("\n")
 
     system_prompt = case character_type

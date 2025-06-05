@@ -1,0 +1,47 @@
+<div class="max-w-4xl mx-auto py-6 px-4">
+  <h1 class="text-2xl font-bold mb-6">山情報の編集</h1>
+
+  <%= form_with model: @mountain, local: true do |form| %>
+    <div class="mb-4">
+      <%= form.label :name, "山の名前", class: "block font-semibold mb-1" %>
+      <%= form.text_field :name, class: "w-full border border-gray-300 rounded px-3 py-2" %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :height, "標高 (m)", class: "block font-semibold mb-1" %>
+      <%= form.number_field :height, class: "w-full border border-gray-300 rounded px-3 py-2" %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :prefecture, "エリア（都道府県）", class: "block font-semibold mb-1" %>
+      <%= form.text_field :prefecture, class: "w-full border border-gray-300 rounded px-3 py-2" %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :feature, "特徴", class: "block font-semibold mb-1" %>
+      <%= form.text_area :feature, rows: 5, class: "w-full border border-gray-300 rounded px-3 py-2" %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :image, "画像アップロード", class: "block font-semibold mb-1" %>
+      <%= form.file_field :image, class: "w-full" %>
+    </div>
+
+    <div class="flex space-x-4">
+      <%= form.submit "更新する", class: "bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600" %>
+      <%= link_to "キャンセル", mountain_path(@mountain), class: "bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400" %>
+    </div>
+  <% end %>
+
+  <% if @mountain.image.attached? %>
+    <div class="mb-4">
+      <p>現在の画像：</p>
+      <%= image_tag @mountain.image.variant(resize_to_limit: [200, 200]) %>
+      <%= form_with model: @mountain, url: mountain_image_path(@mountain), method: :delete do %>
+        <%= submit_tag "画像削除",
+              data: { confirm: "本当に画像を削除しますか？" },
+              class: "bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 mt-2" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
