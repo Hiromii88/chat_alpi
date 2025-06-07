@@ -16,8 +16,9 @@ test:
   database: alpi_test
 
 production:
+  <<: *default
   database: <%= ENV['DATABASE_NAME'] %>
   username: <%= ENV['DATABASE_USERNAME'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
   host: <%= ENV['DATABASE_HOST'] %>
-  port: 5432
+  port: <%= ENV['DATABASE_PORT'] || 5432 %>
