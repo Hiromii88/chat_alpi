@@ -1,4 +1,4 @@
-<div class="top-page">
+<div class="top-page" data-controller="modal">
   <h2 class="top-page__subtitle">どの山に行く？</h2>
 
   <div id="logo">
@@ -6,18 +6,17 @@
   </div>
 
   <div class="flex space-x-6 justify-center mt-6">
-    <%= image_tag("cat_icon.png", alt: "にゃん", class: "character-icon", data: { character: "cat" }) %>
-    <%= image_tag("oldman_icon.png", alt: "じぃ", class: "character-icon", data: { character: "oldman" }) %>
-    <%= image_tag("alien_icon.png", alt: "うちゅ", class: "character-icon", data: { character: "alien" }) %>
+    <%= image_tag("cat_icon.png", alt: "にゃん", class: "character-icon", data: { action: "click->modal#open", character: "cat" }) %>
+    <%= image_tag("oldman_icon.png", alt: "じぃ", class: "character-icon", data: { action: "click->modal#open", character: "oldman" }) %>
+    <%= image_tag("alien_icon.png", alt: "うちゅ", class: "character-icon", data: { action: "click->modal#open", character: "alien" }) %>
   </div>
 
-  <!-- モーダル本体 -->
-  <div id="character-modal" class="modal hidden">
+  <div data-modal-target="modal" class="modal hidden">
     <div class="modal-content">
-      <p id="modal-message">このキャラと話す？</p>
+      <p data-modal-target="message">このキャラと話す？</p>
       <div class="modal-buttons">
-        <button id="cancel-button">キャンセル</button>
-        <a id="confirm-button" href="#">OK</a>
+        <button data-action="click->modal#close">キャンセル</button>
+        <a data-modal-target="confirm" href="#">OK</a>
       </div>
     </div>
   </div>

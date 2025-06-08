@@ -19,7 +19,7 @@ RUN apt-get update -qq && \
 # Set production environment
 ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
-    BUNDLE_PATH="/usr/local/bundle" \
+    BUNDLE_PATH="vendor/bundle" \
     BUNDLE_WITHOUT="development"
 
 # Throw-away build stage to reduce size of final image
@@ -34,10 +34,12 @@ RUN apt-get update && apt-get install -y nodejs yarn
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
-RUN bundle install && \
+
+RUN gem install bundler:2.4.22
+RUN bundle config set path vendor/bundle && \
+    bundle _2.4.22_ install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile
-
 # Copy application code
 COPY . .
 
@@ -57,10 +59,6 @@ RUN SECRET_KEY_BASE=dummyvalue ./bin/rails assets:precompile
 FROM base
 WORKDIR /app
 COPY --from=build /app /app
-
-# Copy built artifacts: gems, application
-COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
-
 # Run and own only the runtime files as a non-root user for security
 RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
