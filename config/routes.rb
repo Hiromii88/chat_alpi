@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  # CSV取り込み用
-  get '/import_mountains', to: 'mountains#import_csv'
 
   get "sessions/new"
   get "sessions/create"

@@ -1,20 +1,4 @@
-class MountainsController < ApplicationController  # app/controllers/mountains_controller.rb
-  def import_csv
-    file_path = Rails.root.join('db/mountains.csv')
-    CSV.foreach(file_path, headers: true) do |row|
-      Mountain.create!(
-        name: row['name'],
-        area: row['area'],           # location -> area に変更
-        height: row['height'],
-        level: row['level'],
-        feature: row['feature'],
-        route_distance: row['route_distance'],
-        prefecture: row['prefecture']
-      )
-    end
-    render plain: "インポート完了"
-  end
-
+class MountainsController < ApplicationController
   def index
     q_params = {
       area_cont: params[:area],
@@ -25,7 +9,6 @@ class MountainsController < ApplicationController  # app/controllers/mountains_c
     @q = Mountain.ransack(q_params)
     @mountains = @q.result.order(created_at: :asc).page(params[:page]).per(12)
   end
-
 
   def show
     @mountain = Mountain.find(params[:id])
