@@ -1,23 +1,7 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "@hotwired/turbo-rails"
 import "controllers"
-
-document.addEventListener("DOMContentLoaded", () => {
-  const menuButton = document.querySelector(".menu-button");
-  const menuBar = document.querySelector(".menu-bar");
-
-  if (menuButton && menuBar) {
-    menuButton.addEventListener("click", () => {
-      menuBar.classList.toggle("open");
-    });
-
-    document.addEventListener("click", (e) => {
-      if (!menuBar.contains(e.target) && !menuButton.contains(e.target)) {
-        menuBar.classList.remove("open");
-      }
-    });
-  }
-});
+import "controllers/modal_controller"
 
 document.addEventListener("turbo:load", () => {
   const button_post = document.getElementById('button_post');
@@ -96,47 +80,19 @@ document.addEventListener("turbo:load", () => {
   });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const icons = document.querySelectorAll(".character-icon");
-  const modal = document.getElementById("character-modal");
-  const confirmButton = document.getElementById("confirm-button");
-  const cancelButton = document.getElementById("cancel-button");
-  const modalMessage = document.getElementById("modal-message");
+document.addEventListener("turbo:load", () => {
+  const menuButton = document.querySelector(".menu-button");
+  const menuBar = document.querySelector(".menu-bar");
 
-  // キャラごとのメッセージと画像パスをまとめておく
-  const characterData = {
-    cat: {
-      message: "にゃんと話す？",
-      imagePath: "/assets/cat_icon.png"
-    },
-    oldman: {
-      message: "じぃと話す？",
-      imagePath: "/assets/oldman_icon.png"
-    },
-    alien: {
-      message: "うちゅと話す？",
-      imagePath: "/assets/alien_icon.png"
-    }
-  };
-
-  icons.forEach(icon => {
-    icon.addEventListener("click", () => {
-      const character = icon.dataset.character;
-
-      if (!characterData[character]) return; // もし不正なキャラなら無視
-
-      // モーダルのメッセージをセット
-      modalMessage.textContent = characterData[character].message;
-
-      // OKボタンのリンクにキャラクタータイプをセット
-      confirmButton.href = `/chatbots/show?character_type=${character}`;
-
-      // モーダル表示
-      modal.classList.remove("hidden");
+  if (menuButton && menuBar) {
+    menuButton.addEventListener("click", () => {
+      menuBar.classList.toggle("open");
     });
-  });
 
-  cancelButton.addEventListener("click", () => {
-    modal.classList.add("hidden");
-  });
+    document.addEventListener("click", (e) => {
+      if (!menuBar.contains(e.target) && !menuButton.contains(e.target)) {
+        menuBar.classList.remove("open");
+      }
+    });
+  }
 });

@@ -1,6 +1,13 @@
 class MountainsController < ApplicationController
   def index
-    @mountains = Mountain.order(created_at: :asc).page(params[:page]).per(12)
+    q_params = {
+      area_cont: params[:area],
+      level_eq: params[:level],
+      name_or_feature_cont: params[:keyword]
+    }.delete_if { |_, v| v.blank? }
+
+    @q = Mountain.ransack(q_params)
+    @mountains = @q.result.order(created_at: :asc).page(params[:page]).per(12)
   end
 
   def show
@@ -12,7 +19,7 @@ class MountainsController < ApplicationController
   end
 
   def create
-    @mountain = Mountains.new(mountain_params)
+    @mountain = Mountain.new(mountain_params)
     if @mountain.save
       redirect_to @mountain, notice: '山を作成しました'
     else

@@ -1,52 +1,24 @@
 # syntax = docker/dockerfile:1
 
-# This Dockerfile is designed for development, not production.
-# Use with `docker-compose` for local development.
-
-# Make sure RUBY_VERSION matches the Ruby version in .ruby-version
 ARG RUBY_VERSION=3.1.4
-FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
+FROM ruby:$RUBY_VERSION-slim
 
-# Rails app lives here
-WORKDIR /alpi
+WORKDIR /app
 
-# Install base packages required for development
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libjemalloc2 libvips postgresql-client git gnupg && \
+    apt-get install --no-install-recommends -y curl libjemalloc2 libvips postgresql-client nodejs yarn build-essential git libpq-dev pkg-config && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-# Install Node.js (needed for Yarn)
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
-    apt-get install -y nodejs
-
-# Install Yarn (needed for managing JavaScript dependencies)
-RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-    apt-get update && \
-    apt-get install --no-install-recommends -y yarn
-
-# Set development environment variables
 ENV RAILS_ENV="development" \
-    BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="production test"
+    BUNDLE_PATH="/usr/local/bundle"
 
-# Install packages needed to build gems
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential libpq-dev pkg-config && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
-
-# Install application gems
 COPY Gemfile Gemfile.lock ./
+
+RUN gem install bundler:2.4.22
 RUN bundle install
 
-# Copy application code
 COPY . .
 
-# Make sure JavaScript and CSS assets are available
-RUN yarn install --check-files
-
-# Expose development port
 EXPOSE 3000
 
-# Command to start the Rails server in development mode
-CMD ["rails",]()
+CMD ["bin/rails", "server", "-b", "0.0.0.0"]
