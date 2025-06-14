@@ -22,8 +22,6 @@ services:
     stdin_open: true
     volumes:
       - .:/app
-      - ./cert:/app/cert
-      - node_modules:/app/node_modules
     environment:
       TZ: Asia/Tokyo
       DATABASE_HOST: db
@@ -37,4 +35,3 @@ services:
 
 volumes:
   db_data:
-  node_modules:
