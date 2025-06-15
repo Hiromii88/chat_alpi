@@ -40,8 +40,8 @@ class ChatbotsController < ApplicationController
             以下は該当する山の情報です：
             #{mountain_info}
 
-            3個の山を紹介した後、以下のURLを含めて「山の情報をもっと見たい方はこちら」と案内してください：
-            https://your-domain.com/mountains
+            3回山の名前を出したら必ず、以下のように書いてください：
+            「詳しくはこちら → https://your-domain.com/mountains」
         PROMPT
 
     when "oldman"
@@ -53,7 +53,7 @@ class ChatbotsController < ApplicationController
             以下は該当する山の情報です：
             #{mountain_info}
 
-            3個の山の名前を出したら必ず、以下のように書いてください：
+            3回山の名前を出したら必ず、以下のように書いてください：
             「詳しくはこちら → https://your-domain.com/mountains」
         PROMPT
 
@@ -66,8 +66,8 @@ class ChatbotsController < ApplicationController
             以下は該当する山の情報です：
             #{mountain_info}
 
-            3個の山を紹介した後、以下のURLを含めて「山の情報をもっと見たい方はこちら」と案内してください：
-            https://your-domain.com/mountains
+            3回山の名前を出したら必ず、以下のように書いてください：
+            「詳しくはこちら → https://your-domain.com/mountains」
         PROMPT
     else
         "関西弁で、フレンドリーに返答してください。まずは相手の登山歴や行きたい場所を聞き出して、そこから話を広げてください。"
@@ -82,7 +82,7 @@ class ChatbotsController < ApplicationController
           { role: "user", content: @user_input }
         ],
         temperature: 0.7,
-        max_tokens: 70
+        max_tokens: 150
       }
     )
 
