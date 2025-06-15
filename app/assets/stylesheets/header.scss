@@ -1,0 +1,27 @@
+/* app/assets/stylesheets/header.scss */
+
+/* ヘッダー */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #a78bfa;
+  padding: 10px 20px;
+  color: white;
+}
+
+.menu-button {
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* ヘッダーリンク */
+.header__link {
+  margin-left: 16px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
