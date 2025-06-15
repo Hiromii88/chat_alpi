@@ -1,10 +1,11 @@
+<!-- app/views/shared/_header.html.erb -->
 <header class="header">
   <div class="header__left">
-    <button class="menu-button">☰</button>
+    <button class="menu-button" id="menu-toggle">☰</button>
   </div>
   <div class="header__right">
     <% if current_user %>
-      <%= link_to "ログアウト", logout_path, method: :delete %>
+      <%= button_to "ログアウト", logout_path, method: :delete, class: "header__link" %>
     <% else %>
       <%= link_to "ログイン", login_path, class: "header__link" %>
       <%= link_to "新規登録", "#", class: "header__link" %>

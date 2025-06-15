@@ -1,7 +1,7 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "@hotwired/turbo-rails"
 import "controllers"
-import "controllers/modal_controller"
+import './menu-toggle';
 
 document.addEventListener("turbo:load", () => {
   const button_post = document.getElementById('button_post');
@@ -78,21 +78,4 @@ document.addEventListener("turbo:load", () => {
       })
       .catch(error => console.error('Error:', error));
   });
-});
-
-document.addEventListener("turbo:load", () => {
-  const menuButton = document.querySelector(".menu-button");
-  const menuBar = document.querySelector(".menu-bar");
-
-  if (menuButton && menuBar) {
-    menuButton.addEventListener("click", () => {
-      menuBar.classList.toggle("open");
-    });
-
-    document.addEventListener("click", (e) => {
-      if (!menuBar.contains(e.target) && !menuButton.contains(e.target)) {
-        menuBar.classList.remove("open");
-      }
-    });
-  }
 });

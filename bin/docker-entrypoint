@@ -1,16 +1,26 @@
 #!/bin/bash -e
 
 # Enable jemalloc for reduced memory usage and latency.
-if [ -z "${LD_PRELOAD+x}" ] && [ -f /usr/lib/*/libjemalloc.so.2 ]; then
-  export LD_PRELOAD="$(echo /usr/lib/*/libjemalloc.so.2)"
+if [ -z "${LD_PRELOAD+x}" ]; then
+  jemalloc_path=$(find /usr/lib -name "libjemalloc.so.2" 2>/dev/null | head -n 1)
+  if [ -n "$jemalloc_path" ]; then
+    export LD_PRELOAD="$jemalloc_path"
+    echo "[entrypoint] jemalloc enabled: $LD_PRELOAD"
+  fi
 fi
 
-# If running the rails server then create or migrate existing database
-if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
-  ./bin/rails db:prepare
-  ./bin/rails db:create
-  ./bin/rails db:migrate
-  ./bin/rails db:seed 
+# Check if running the Rails server
+if [[ "$1" == "./bin/rails" && "$2" == "server" ]]; then
+  echo "[entrypoint] Running database preparation..."
+  bundle exec rails db:prepare
+
+  if [[ "$RUN_SEEDS" == "true" ]]; then
+    echo "[entrypoint] Seeding the database..."
+    bundle exec rails db:seed
+  fi
 fi
 
-exec "${@}"
+# Run the main container command
+echo "[entrypoint] Executing: $@"
+exec "$@"
+

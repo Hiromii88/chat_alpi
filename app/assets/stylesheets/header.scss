@@ -1,0 +1,31 @@
+/* app/assets/stylesheets/header.scss */
+
+/* ヘッダー */
+.header {
+  position: relative; /* メニューを重ねるために必要 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #a78bfa;
+  padding: 10px 20px;
+  color: white;
+  z-index: 1000; /* メニューよりも上に */
+}
+
+/* ハンバーガーボタン */
+.menu-button {
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+/* ヘッダーリンク */
+.header__link {
+  margin-left: 16px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}

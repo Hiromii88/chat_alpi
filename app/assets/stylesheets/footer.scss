@@ -1,0 +1,26 @@
+/* app/assets/stylesheets/footer.scss */
+
+.footer {
+  background-color: #f8f8f8;
+  padding: 16px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  border-top: 1px solid #ccc;
+  margin-top: auto;
+}
+
+/* SNSアイコン */
+.footer__sns {
+  margin-bottom: 8px;
+}
+
+.footer__sns a {
+  margin: 0 8px;
+  color: #666;
+  font-size: 20px;
+}
+
+.footer__sns a:hover {
+  color: #000;
+}

@@ -12,17 +12,32 @@
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <%= javascript_importmap_tags %> 
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <body>
-    <div class="wrapper">
-      <%= render 'shared/header' %>
-      <%= yield %>
-      <%= render 'shared/footer' %>
+<body>
+  <div class="wrapper">
+    <%= render 'shared/header' %>
+
+    <% if flash[:notice] %>
+      <div class="bg-green-100 text-green-800 px-4 py-3 rounded mb-4 text-center">
+        <%= flash[:notice] %>
       </div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div class="bg-red-100 text-red-800 px-4 py-3 rounded mb-4 text-center">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+
+    <%= yield %>
+    <%= render 'shared/footer' %>
+  </div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   </body>
 </html>

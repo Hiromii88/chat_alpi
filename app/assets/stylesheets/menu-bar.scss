@@ -1,0 +1,71 @@
+/* ベースメニューのスタイル */
+.menu-bar {
+  display: none; /* 初期状態で非表示 */
+  position: absolute;
+  top: 60px; /* ヘッダーの高さに応じて調整 */
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 20px;
+  font-family: 'Helvetica Neue', sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  z-index: 999;
+}
+
+.menu-bar.active {
+  display: block;
+}
+
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-item {
+  position: relative;
+  margin: 10px 0;
+}
+
+.menu-item > a,
+.menu-item > span {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  display: block;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.menu-item > a:hover,
+.menu-item > span:hover {
+  background-color: #f0f0f0;
+}
+
+/* サブメニュー */
+.submenu {
+  list-style: none;
+  padding-left: 20px;
+  margin-top: 5px;
+  display: none;
+}
+
+.menu-item.has-submenu:hover .submenu {
+  display: block;
+}
+
+.submenu li a {
+  display: block;
+  padding: 8px 15px;
+  font-weight: normal;
+  color: #555;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+}
+
+.submenu li a:hover {
+  background-color: #e9f5ff;
+  color: #0077cc;
+}

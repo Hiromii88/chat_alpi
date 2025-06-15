@@ -4,4 +4,5 @@
 //= link_tree ../../../vendor/javascript .js
 //= link application.js
 //= link application.css
-
+//= link_tree ../images
+//= link menu-toggle.js

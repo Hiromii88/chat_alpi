@@ -30,7 +30,7 @@
   <div class="top-page__search">
     <p>自力で探す！</p>
     <div class="search-form">
-      <%= form_with url: "#", method: :get, local: true do |form| %>
+      <%= form_with url: mountains_path, method: :get, local: true do |form| %>
         <%= form.text_field :keyword, placeholder: "キーワード検索", class: "search-input" %>
         <%= form.submit "検索", class: "search-button" %>
       <% end %>
