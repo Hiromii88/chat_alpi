@@ -1,0 +1,17 @@
+current directory: /Users/hirom/alpi/vendor/bundle/ruby/3.1.0/gems/stringio-3.1.7/ext/stringio
+/Users/hirom/.rbenv/versions/3.1.4/bin/ruby -I /Users/hirom/.rbenv/versions/3.1.4/lib/ruby/3.1.0 extconf.rb
+checking for rb_io_mode_t in ruby/io.h... no
+creating Makefile
+
+current directory: /Users/hirom/alpi/vendor/bundle/ruby/3.1.0/gems/stringio-3.1.7/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20250615-2542-ysr3h sitelibdir\=./.gem.20250615-2542-ysr3h clean
+
+current directory: /Users/hirom/alpi/vendor/bundle/ruby/3.1.0/gems/stringio-3.1.7/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20250615-2542-ysr3h sitelibdir\=./.gem.20250615-2542-ysr3h
+compiling stringio.c
+linking shared-object stringio.bundle
+ld: warning: ignoring duplicate libraries: '-lruby.3.1'
+
+current directory: /Users/hirom/alpi/vendor/bundle/ruby/3.1.0/gems/stringio-3.1.7/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20250615-2542-ysr3h sitelibdir\=./.gem.20250615-2542-ysr3h install
+/opt/homebrew/bin/ginstall -c -m 0755 stringio.bundle ./.gem.20250615-2542-ysr3h

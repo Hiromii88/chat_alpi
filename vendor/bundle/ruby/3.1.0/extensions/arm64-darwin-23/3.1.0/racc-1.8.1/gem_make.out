@@ -1,0 +1,16 @@
+current directory: /Users/hirom/alpi/vendor/bundle/ruby/3.1.0/gems/racc-1.8.1/ext/racc/cparse
+/Users/hirom/.rbenv/versions/3.1.4/bin/ruby -I /Users/hirom/.rbenv/versions/3.1.4/lib/ruby/3.1.0 extconf.rb
+creating Makefile
+
+current directory: /Users/hirom/alpi/vendor/bundle/ruby/3.1.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20250615-2542-ughs10 sitelibdir\=./.gem.20250615-2542-ughs10 clean
+
+current directory: /Users/hirom/alpi/vendor/bundle/ruby/3.1.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20250615-2542-ughs10 sitelibdir\=./.gem.20250615-2542-ughs10
+compiling cparse.c
+linking shared-object racc/cparse.bundle
+ld: warning: ignoring duplicate libraries: '-lruby.3.1'
+
+current directory: /Users/hirom/alpi/vendor/bundle/ruby/3.1.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20250615-2542-ughs10 sitelibdir\=./.gem.20250615-2542-ughs10 install
+/opt/homebrew/bin/ginstall -c -m 0755 cparse.bundle ./.gem.20250615-2542-ughs10/racc

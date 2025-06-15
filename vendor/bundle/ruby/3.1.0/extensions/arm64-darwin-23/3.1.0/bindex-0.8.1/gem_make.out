@@ -1,0 +1,16 @@
+current directory: /Users/hirom/alpi/vendor/bundle/ruby/3.1.0/gems/bindex-0.8.1/ext/skiptrace
+/Users/hirom/.rbenv/versions/3.1.4/bin/ruby -I /Users/hirom/.rbenv/versions/3.1.4/lib/ruby/3.1.0 extconf.rb
+creating Makefile
+
+current directory: /Users/hirom/alpi/vendor/bundle/ruby/3.1.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20250615-2542-wizuz9 sitelibdir\=./.gem.20250615-2542-wizuz9 clean
+
+current directory: /Users/hirom/alpi/vendor/bundle/ruby/3.1.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20250615-2542-wizuz9 sitelibdir\=./.gem.20250615-2542-wizuz9
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.bundle
+ld: warning: ignoring duplicate libraries: '-lruby.3.1'
+
+current directory: /Users/hirom/alpi/vendor/bundle/ruby/3.1.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20250615-2542-wizuz9 sitelibdir\=./.gem.20250615-2542-wizuz9 install
+/opt/homebrew/bin/ginstall -c -m 0755 cruby.bundle ./.gem.20250615-2542-wizuz9/skiptrace/internal

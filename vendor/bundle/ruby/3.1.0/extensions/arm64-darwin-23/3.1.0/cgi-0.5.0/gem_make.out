@@ -1,0 +1,16 @@
+current directory: /Users/hirom/alpi/vendor/bundle/ruby/3.1.0/gems/cgi-0.5.0/ext/cgi/escape
+/Users/hirom/.rbenv/versions/3.1.4/bin/ruby -I /Users/hirom/.rbenv/versions/3.1.4/lib/ruby/3.1.0 extconf.rb
+creating Makefile
+
+current directory: /Users/hirom/alpi/vendor/bundle/ruby/3.1.0/gems/cgi-0.5.0/ext/cgi/escape
+make DESTDIR\= sitearchdir\=./.gem.20250615-2542-udc7h2 sitelibdir\=./.gem.20250615-2542-udc7h2 clean
+
+current directory: /Users/hirom/alpi/vendor/bundle/ruby/3.1.0/gems/cgi-0.5.0/ext/cgi/escape
+make DESTDIR\= sitearchdir\=./.gem.20250615-2542-udc7h2 sitelibdir\=./.gem.20250615-2542-udc7h2
+compiling escape.c
+linking shared-object cgi/escape.bundle
+ld: warning: ignoring duplicate libraries: '-lruby.3.1'
+
+current directory: /Users/hirom/alpi/vendor/bundle/ruby/3.1.0/gems/cgi-0.5.0/ext/cgi/escape
+make DESTDIR\= sitearchdir\=./.gem.20250615-2542-udc7h2 sitelibdir\=./.gem.20250615-2542-udc7h2 install
+/opt/homebrew/bin/ginstall -c -m 0755 escape.bundle ./.gem.20250615-2542-udc7h2/cgi
