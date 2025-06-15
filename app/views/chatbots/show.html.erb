@@ -1,12 +1,21 @@
 <div class="flex flex-col items-center justify-center py-6 w-full h-full">
   <div class="max-w-4xl w-full space-y-8 h-full">
-    <div id="conversation" class="space-y-4 p-4 rounded overflow-y-auto">
+    <div id="conversation" class="space-y-4 p-4 rounded overflow-y-auto bg-gray-100 min-h-[400px]">
+      <div class="flex items-start space-x-4">
+        <img src="<%= image_path("#{@character_type}_icon.png") %>" class="w-10 h-10 rounded-full" alt="キャラアイコン">
+        <div class="bg-white p-3 rounded-lg shadow">
+          <p>どんな山に行きたい？</p>
+        </div>
+      </div>
     </div>
+
     <form id="text_form" class="flex items-center px-2 py-1 border-t border-gray-200 bg-white">
-      <input type="text" placeholder="どこの山に行きたい？（例：長野県、北アルプス）" id="user_input" class="flex-1 px-3 py-2 border rounded border-gray-300 focus:border-blue-500 focus:outline-none focus:ring">
-      <button id="button_post" class="px-4 py-2 bg-green-500 text-white rounded-md transition duration-300 ease-in-out hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-200 ml-2">送信</button>
+      <input type="text" placeholder="例：長野県、北アルプスなど" id="user_input" class="flex-1 px-3 py-2 border rounded border-gray-300 focus:border-blue-500 focus:outline-none focus:ring">
+      <button id="button_post" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 ml-2">送信</button>
     </form>
   </div>
+</div>
+
 </div>
 <div id="character-icon-paths"
     data-cat="<%= image_path('cat_icon.png') %>"
