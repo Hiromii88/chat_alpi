@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   get 'chatbots/show', to: 'chatbots#show', as: 'chatbots_show'
 
+  get 'mountains/:name', to: 'mountains#show_by_name', as: 'mountain_by_name'
+
   resources :chatbots do
     collection do
       get 'generate_text'
