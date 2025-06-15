@@ -1,7 +1,7 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "@hotwired/turbo-rails"
 import "controllers"
-import './menu-toggle';
+import 'menu-toggle';
 
 document.addEventListener("turbo:load", () => {
   const button_post = document.getElementById('button_post');
