@@ -35,10 +35,11 @@ RUN apt-get update && apt-get install -y nodejs yarn
 # Install application gems
 COPY Gemfile Gemfile.lock ./
 
-RUN gem install bundler:2.4.22
-RUN bundle config set path vendor/bundle && \
-    bundle _2.4.22_ install && \
-    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
+RUN gem install bundler
+
+RUN bundle config set path 'vendor/bundle' && \
+    bundle install && \
+    rm -rf ~/.bundle/ vendor/bundle/ruby/*/cache vendor/bundle/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile
 # Copy application code
 COPY . .
