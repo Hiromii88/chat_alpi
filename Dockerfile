@@ -39,8 +39,7 @@ RUN gem install bundler
 
 RUN bundle config set path 'vendor/bundle' && \
     bundle install && \
-    rm -rf ~/.bundle/ vendor/bundle/ruby/*/cache vendor/bundle/ruby/*/bundler/gems/*/.git && \
-    bundle exec bootsnap precompile --gemfile
+    rm -rf ~/.bundle/ vendor/bundle/ruby/*/cache vendor/bundle/ruby/*/bundler/gems/*/.git
 # Copy application code
 COPY . .
 
