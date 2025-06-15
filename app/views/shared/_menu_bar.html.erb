@@ -1,28 +1,20 @@
-<!-- app/views/shared/_menu_bar.html.erb -->
 <nav class="menu-bar" id="menu-bar">
   <ul class="menu-list">
-    <li class="menu-item has-submenu">
-      <span>ALPIとチャット</span>
-      <ul class="submenu">
-        <li><%= link_to "猫と話す", "#" %></li>
-        <li><%= link_to "お爺さんと話す", "#" %></li>
-        <li><%= link_to "宇宙人と話す", "#" %></li>
-      </ul>
-    </li>
-    <li class="menu-item has-submenu">
-      <span>山情報を探す</span>
-      <ul class="submenu">
-        <li><%= link_to "山情報一覧・検索", mountains_path %></li>
-      </ul>
-    </li>
-    <li class="menu-item has-submenu">
-      <span>レポートを見る</span>
-      <ul class="submenu">
-        <li><%= link_to "レポート一覧・検索", "#" %></li>
-      </ul>
-    </li>
     <li class="menu-item">
-      <%= link_to "新規登録", "#" %>
+      <%= link_to "TOP", root_path %>
+    </li>
+    
+    <li class="menu-item has-submenu">
+      <span>チャット</span>
+      <ul class="submenu">
+        <li><%= link_to "猫と話す", chatbots_show_path(character_type: "cat") %></li>
+        <li><%= link_to "爺と話す", chatbots_show_path(character_type: "oldman") %></li>
+        <li><%= link_to "宇宙人と話す", chatbots_show_path(character_type: "alien") %></li>
+      </ul>
+    </li>
+
+    <li class="menu-item">
+      <%= link_to "山情報一覧・検索", mountains_path %>
     </li>
   </ul>
 </nav>
