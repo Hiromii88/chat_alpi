@@ -4,7 +4,13 @@ Rails.application.routes.draw do
   post   'login',  to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy', as: 'logout'
 
-  resources :users, only: %i[new create edit show update destroy]
+  resources :users, only: %i[new create edit show update destroy] do
+    member do
+      get :edit_cover_image
+      patch :update_cover_image
+    end
+  end
+
   resources :mountains do
     resource :image, only: %i[destroy], module: 'mountains'
   end

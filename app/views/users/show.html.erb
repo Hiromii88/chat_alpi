@@ -1,27 +1,35 @@
 <!-- 背景画像とアイコン -->
 <div class="relative h-48 rounded-lg shadow-md mb-4
             <%= current_user.cover_image.attached? ? '' : 'bg-gray-300 flex items-center justify-center' %>"
-     style="<%= current_user.cover_image.attached? ? "background-image: url(#{url_for(current_user.cover_image)}); background-size: cover; background-position: center;" : '' %>">
-  
+    style="<%= current_user.cover_image.attached? ? "background-image: url(#{url_for(current_user.cover_image)}); background-size: cover; background-position: center;" : '' %>">
+
   <% unless current_user.cover_image.attached? %>
     <div class="text-gray-600 text-2xl font-semibold">
       <%= current_user.name %>
     </div>
   <% end %>
 
+  <!-- 背景画像の編集リンク -->
+  <div class="absolute top-2 right-2">
+    <%= link_to "画像編集", edit_user_path(current_user), class: "text-sm text-white bg-black bg-opacity-50 px-2 py-1 rounded hover:bg-opacity-75" %>
+  </div>
+
+  <!-- アイコン画像（マイページ編集リンク付き） -->
   <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-    <% if current_user.icon.attached? %>
-      <%= image_tag url_for(current_user.icon), class: "w-16 h-16 rounded-full border-2 border-white object-cover" %>
-    <% else %>
-      <div class="w-16 h-16 rounded-full bg-gray-500 text-white flex items-center justify-center text-xl font-bold border-2 border-white">
-        <%= current_user.name.first.upcase %>
-      </div>
+    <%= link_to edit_user_path(current_user) do %>
+      <% if current_user.icon.attached? %>
+        <%= image_tag url_for(current_user.icon), class: "w-16 h-16 rounded-full border-2 border-white object-cover hover:opacity-80 transition" %>
+      <% else %>
+        <div class="w-16 h-16 rounded-full bg-gray-500 text-white flex items-center justify-center text-xl font-bold border-2 border-white hover:opacity-80 transition">
+          <%= current_user.name.first.upcase %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 
+  <!-- ユーザー名表示 -->
   <div class="absolute bottom-4 left-4 text-white text-xl font-bold">
     <%= current_user.name %>
-    <%= link_to "編集", edit_user_path(current_user), class: "text-sm ml-2 underline" %>
   </div>
 </div>
 
