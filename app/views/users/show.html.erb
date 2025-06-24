@@ -1,0 +1,60 @@
+<!-- 背景画像とアイコン -->
+<div class="relative h-48 rounded-lg shadow-md mb-4
+            <%= current_user.cover_image.attached? ? '' : 'bg-gray-300 flex items-center justify-center' %>"
+     style="<%= current_user.cover_image.attached? ? "background-image: url(#{url_for(current_user.cover_image)}); background-size: cover; background-position: center;" : '' %>">
+  
+  <% unless current_user.cover_image.attached? %>
+    <div class="text-gray-600 text-2xl font-semibold">
+      <%= current_user.name %>
+    </div>
+  <% end %>
+
+  <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    <% if current_user.icon.attached? %>
+      <%= image_tag url_for(current_user.icon), class: "w-16 h-16 rounded-full border-2 border-white object-cover" %>
+    <% else %>
+      <div class="w-16 h-16 rounded-full bg-gray-500 text-white flex items-center justify-center text-xl font-bold border-2 border-white">
+        <%= current_user.name.first.upcase %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="absolute bottom-4 left-4 text-white text-xl font-bold">
+    <%= current_user.name %>
+    <%= link_to "編集", edit_user_path(current_user), class: "text-sm ml-2 underline" %>
+  </div>
+</div>
+
+<!-- 自分の投稿 -->
+<section class="mb-8">
+  <div class="flex justify-between items-center mb-2">
+    <h2 class="text-lg font-bold">マイレポ</h2>
+    <%= link_to "新規投稿", new_report_path, class: "text-blue-500 hover:underline" %>
+  </div>
+
+  <div class="grid grid-cols-2 gap-4 md:grid-cols-3">
+    <% @my_reports.each do |report| %>
+      <div class="bg-gray-100 p-2 rounded">
+        <%= link_to image_tag(report.thumbnail_url), report_path(report) %>
+        <p class="text-sm mt-1 truncate"><%= report.title %></p>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<!-- お気に入り -->
+<section>
+  <div class="flex justify-between items-center mb-2">
+    <h2 class="text-lg font-bold">お気に入り</h2>
+    <%= link_to "レポ一覧へ", reports_path, class: "text-blue-500 hover:underline" %>
+  </div>
+
+  <div class="grid grid-cols-2 gap-4 md:grid-cols-5">
+    <% @favorites.each do |report| %>
+      <div class="bg-white p-2 rounded shadow">
+        <%= link_to image_tag(report.thumbnail_url), report_path(report) %>
+        <p class="text-sm mt-1 truncate">❤️ <%= report.title %></p>
+      </div>
+    <% end %>
+  </div>
+</section>

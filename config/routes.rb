@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   post   'login',  to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy', as: 'logout'
 
-  resources :users, only: %i[new create edit update destroy]
+  resources :users, only: %i[new create edit show update destroy]
   resources :mountains do
     resource :image, only: %i[destroy], module: 'mountains'
   end
@@ -22,4 +22,6 @@ Rails.application.routes.draw do
   post 'select_character', to: 'characters#select', as: 'select_character'
 
   root "top#index"
+
+  resources :reports
 end

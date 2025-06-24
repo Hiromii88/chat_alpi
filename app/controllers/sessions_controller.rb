@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:email])
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to root_path, notice: "ログインしました"
+      redirect_to user_path(user), notice: "ログインしました"
     else
       redirect_to login_path, alert: "メールまたはパスワードが間違っています"
     end
