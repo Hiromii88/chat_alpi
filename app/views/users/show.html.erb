@@ -40,14 +40,25 @@
     <%= link_to "新規投稿", new_report_path, class: "text-blue-500 hover:underline" %>
   </div>
 
-  <div class="grid grid-cols-2 gap-4 md:grid-cols-3">
+  <div class="grid grid-cols-3 gap-4 md:grid-cols-6">
     <% @my_reports.each do |report| %>
-      <div class="bg-gray-100 p-2 rounded">
-        <%= link_to image_tag(report.thumbnail_url), report_path(report) %>
-        <p class="text-sm mt-1 truncate"><%= report.title %></p>
+      <div class="bg-gray-100 rounded overflow-hidden aspect-square relative">
+        <%= link_to report_path(report) do %>
+          <% if report.image.attached? %>
+            <%= image_tag report.image.variant(resize_to_limit: [100, 100]), class: "w-full h-full object-cover" %>
+          <% else %>
+            <div class="w-full h-full bg-gray-300 flex items-center justify-center text-gray-600">
+              No Image
+            </div>
+          <% end %>
+          <div class="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white text-sm w-full p-1 truncate">
+            <%= report.title %>
+          </div>
+        <% end %>
       </div>
     <% end %>
   </div>
+
 </section>
 
 <!-- お気に入り -->
@@ -60,7 +71,7 @@
   <div class="grid grid-cols-2 gap-4 md:grid-cols-5">
     <% @favorites.each do |report| %>
       <div class="bg-white p-2 rounded shadow">
-        <%= link_to image_tag(report.thumbnail_url), report_path(report) %>
+        <%= link_to image_tag(report.image.variant(resize_to_limit: [200, 200])), report_path(report) if report.image.attached? %>
         <p class="text-sm mt-1 truncate">❤️ <%= report.title %></p>
       </div>
     <% end %>
