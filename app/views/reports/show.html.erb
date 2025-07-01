@@ -1,0 +1,67 @@
+<div class="container mx-auto px-4 py-6">
+
+  <!-- タイトルと操作 -->
+  <div class="flex justify-between items-center mb-4">
+    <h1 class="text-2xl font-bold"><%= @report.title %></h1>
+    <div class="space-x-4 text-sm">
+      <%= link_to "編集", edit_report_path(@report), class: "text-blue-600 hover:underline" %>
+      <%= link_to "削除", @report, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "text-red-500 hover:underline" %>
+    </div>
+  </div>
+
+  <!-- 画像スライダー風 -->
+  <div class="bg-gray-100 h-64 rounded-md flex items-center justify-center mb-4">
+    <% if @report.image.attached? %>
+      <%= image_tag @report.image, class: "max-h-60 object-contain" %>
+    <% else %>
+      <p class="text-gray-500">画像がありません</p>
+    <% end %>
+  </div>
+
+  <!-- スライダーの点と矢印（ダミー） -->
+  <div class="flex justify-center items-center space-x-4 mb-2">
+    <button>&lt;</button>
+    <% 5.times do |i| %>
+      <span class="w-2 h-2 rounded-full bg-gray-300 inline-block <%= 'bg-black' if i == 0 %>"></span>
+    <% end %>
+    <button>&gt;</button>
+  </div>
+
+  <!-- いいねと本文 -->
+  <div class="mb-6">
+    <p class="text-lg">❤️ (<%= @report.favorites&.count || 0 %>)</p>
+    <p class="mt-2 whitespace-pre-line"><%= @report.content %></p>
+  </div>
+
+  <hr class="my-6">
+
+  <!-- レポログ -->
+  <h2 class="text-xl font-bold mb-2">レポログ（<%= @related_logs&.count || 0 %>）</h2>
+
+  <% if @related_logs.present? %>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-4">
+      <% @related_logs.each do |log| %>
+        <div class="bg-white p-2 rounded shadow text-center">
+          <%= link_to image_tag(log.image.variant(resize_to_limit: [100, 100]) || "no_image.png", class: "mx-auto w-full h-32 object-cover rounded mb-2"), report_path(log) %>
+          <p><%= log.title %></p>
+          <p class="text-sm text-red-500">❤️ (<%= log.favorites&.count || 0 %>)</p>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-gray-500">他のレポートはまだありません。</p>
+  <% end %>
+
+  <!-- ページネーション -->
+  <% if @related_logs.respond_to?(:total_pages) && @related_logs.total_pages > 1 %>
+    <div class="flex justify-center">
+      <%= paginate @related_logs, theme: 'tailwind' %>
+    </div>
+  <% end %>
+
+  <!-- ✅ マイページに戻るボタン -->
+  <div class="mt-8 text-center">
+    <%= link_to "マイページに戻る", user_path(current_user), class: "inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded" %>
+  </div>
+
+</div>
