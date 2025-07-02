@@ -29,14 +29,18 @@ class ReportsController < ApplicationController
     if @report.update(report_params)
       redirect_to @report, notice: 'レポートを更新しました'
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @report = current_user.reports.find(params[:id])
-    @report.destroy
-    redirect_to report_path, notice: 'レポートを削除しました'
+    @report = current_user.reports.find_by(id: params[:id])
+    if @report
+      @report.destroy
+      redirect_to reports_path, notice: 'レポートを削除しました'
+    else
+      redirect_to reports_path, alert: '削除できるレポートが見つかりません'
+    end
   end
 
   private
