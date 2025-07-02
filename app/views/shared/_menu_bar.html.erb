@@ -17,6 +17,10 @@
       <%= link_to "山情報一覧・検索", mountains_path %>
     </li>
 
+    <li class="menu-item">
+      <%= link_to "レポート一覧", reports_path %>
+    </li>
+
     <% if current_user %>
       <li class="menu-item">
         <%= link_to "マイページ", user_path(current_user) %>

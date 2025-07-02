@@ -45,7 +45,7 @@
       <div class="bg-gray-100 rounded overflow-hidden aspect-square relative">
         <%= link_to report_path(report) do %>
           <% if report.image.attached? %>
-            <%= image_tag report.image.variant(resize_to_limit: [100, 100]), class: "w-full h-full object-cover" %>
+            <%= image_tag report.image.variant(resize_to_limit: [200, 200]), class: "w-full h-full object-cover" %>
           <% else %>
             <div class="w-full h-full bg-gray-300 flex items-center justify-center text-gray-600">
               No Image

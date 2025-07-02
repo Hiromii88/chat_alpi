@@ -2,6 +2,8 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import 'menu-toggle';
+import "@rails/ujs"
+
 
 document.addEventListener("turbo:load", () => {
   const formText = document.querySelector("#user_input");
