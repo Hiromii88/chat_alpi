@@ -1,0 +1,3 @@
+<%= link_to report_favorites_path(report_id: report.id), id: "bookmark-button-for-report-#{report.id}", data: { turbo_method: :post }, class: "text-yellow-500" do %>
+  <i class="bi bi-star"></i>
+<% end %>
