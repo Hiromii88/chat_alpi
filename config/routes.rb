@@ -29,5 +29,7 @@ Rails.application.routes.draw do
 
   root "top#index"
 
-  resources :reports
+  resources :reports do
+    resources :favorites, only: %i[create destroy]
+  end
 end

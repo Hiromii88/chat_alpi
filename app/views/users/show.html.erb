@@ -70,10 +70,18 @@
 
   <div class="grid grid-cols-2 gap-4 md:grid-cols-5">
     <% @favorites.each do |report| %>
-      <div class="bg-white p-2 rounded shadow">
-        <%= link_to image_tag(report.image.variant(resize_to_limit: [200, 200])), report_path(report) if report.image.attached? %>
-        <p class="text-sm mt-1 truncate">❤️ <%= report.title %></p>
-      </div>
+      <%= link_to report_path(report), class: "block bg-white rounded shadow overflow-hidden hover:shadow-md transition" do %>
+        <% if report.image.attached? %>
+          <%= image_tag report.image.variant(resize_to_limit: [200, 200]), class: "w-full h-32 object-cover" %>
+        <% else %>
+          <div class="w-full h-32 bg-gray-300 flex items-center justify-center text-gray-500 text-sm">
+            No Image
+          </div>
+        <% end %>
+        <div class="p-2 text-sm text-gray-800 truncate">
+          ❤️ <%= report.title %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </section>
