@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "mountain_links/show"
+
   get    'login',  to: 'sessions#new',     as: 'login'
   post   'login',  to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy', as: 'logout'
@@ -10,6 +10,8 @@ Rails.application.routes.draw do
       patch :update_cover_image
     end
   end
+
+  resources :password_resets, only: %i[new create edit update]
 
   resources :mountains do
     resource :image, only: %i[destroy], module: 'mountains'
@@ -32,4 +34,7 @@ Rails.application.routes.draw do
   resources :reports do
     resources :favorites, only: %i[create destroy]
   end
+
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
 end

@@ -5,20 +5,16 @@ default: &default
   username: <%= ENV.fetch("DATABASE_USERNAME", "alpi") %>
   password: <%= ENV.fetch("DATABASE_PASSWORD", "password") %>
   host: <%= ENV.fetch("DATABASE_HOST", "db") %>
-  port: 5432
+  port: <%= ENV.fetch("DATABASE_PORT", 5432) %>
 
 development:
   <<: *default
-  database: alpi_development
+  database: <%= ENV.fetch("DATABASE_NAME", "alpi_development") %>
 
 test:
   <<: *default
-  database: alpi_test
+  database: <%= ENV.fetch("DATABASE_NAME", "alpi_test") %>
 
 production:
   <<: *default
-  database: <%= ENV['DATABASE_NAME'] %>
-  username: <%= ENV['DATABASE_USERNAME'] %>
-  password: <%= ENV['DATABASE_PASSWORD'] %>
-  host: <%= ENV['DATABASE_HOST'] %>
-  port: <%= ENV.fetch("DATABASE_PORT", 5432) %>
+  database: <%= ENV.fetch("DATABASE_NAME", "alpi_production") %>
