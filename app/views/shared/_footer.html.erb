@@ -1,8 +1,9 @@
 <footer class="footer">
   <div class="footer__links">
-    <%= link_to "お問合せ", "#", class: "footer__link" %>
-    <%= link_to "利用規約", "#", class: "footer__link" %>
-    <%= link_to "プライバシーポリシー", "#", class: "footer__link" %>
+    <%= link_to "このサイトについて", about_path, class: "footer-link" %>
+    <%= link_to "利用規約", terms_path, class: "footer__link" %>
+    <%= link_to "プライバシーポリシー", privacy_path, class: "footer__link" %>
+    <%= link_to "お問合せ", new_contact_path, class: "footer__link" %>
   </div>
   <div class="footer__icons">
     <%= link_to "#", class: "footer__icon" do %>
