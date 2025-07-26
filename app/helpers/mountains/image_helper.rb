@@ -1,2 +1,0 @@
-module Mountains::ImageHelper
-end

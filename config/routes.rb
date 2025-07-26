@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  root "top#index"
+
+  resources :contacts, only: %i[new create]
+
+  get "about",   to: "pages#about"
+  get "privacy", to: "pages#privacy"
+  get "terms",   to: "pages#terms"
 
   get    'login',  to: 'sessions#new',     as: 'login'
   post   'login',  to: 'sessions#create'
@@ -28,8 +35,6 @@ Rails.application.routes.draw do
   end
 
   post 'select_character', to: 'characters#select', as: 'select_character'
-
-  root "top#index"
 
   resources :reports do
     resources :favorites, only: %i[create destroy]
